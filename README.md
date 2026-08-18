@@ -2,8 +2,9 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>정인하이츠 원룸 체크리스트</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#fff5e9">
+<title>정인하이츠</title>
 
 <style>
 *{
@@ -11,713 +12,1014 @@
     -webkit-tap-highlight-color:transparent;
 }
 
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+}
+
 body{
-    margin:0;
-    font-family:"Arial Rounded MT Bold","Noto Sans KR",sans-serif;
-    background:linear-gradient(180deg,#fff8ee,#f7eee4);
-    color:#4d3b2f;
+    font-family:
+        "Noto Sans KR",
+        "Apple SD Gothic Neo",
+        Arial,
+        sans-serif;
+    background:#fff6ea;
+    color:#594438;
 }
 
-.page{display:none;}
-.page.active{display:block;}
+button,
+input,
+select{
+    font-family:inherit;
+}
 
-header{
+button{
+    border:0;
+    cursor:pointer;
+    touch-action:manipulation;
+}
+
+.screen{
+    display:none;
+    min-height:100vh;
+}
+
+.screen.active{
+    display:block;
+}
+
+.header{
     text-align:center;
-    padding:23px 15px 16px;
+    padding:28px 15px 18px;
 }
 
-header h1{
+.header h1{
     margin:0;
-    font-size:29px;
+    font-size:30px;
     font-weight:900;
-    color:#76523d;
+    color:#704c39;
 }
 
-header p{
+.header p{
     margin:7px 0 0;
-    font-size:13px;
-    color:#a17d66;
+    font-size:14px;
+    color:#9b7c69;
 }
+
+
+/* =========================
+   건물
+========================= */
 
 .building-wrap{
+    width:100%;
+    padding:5px 16px 20px;
     display:flex;
     justify-content:center;
-    padding:5px 15px 20px;
 }
 
 .building{
-    width:min(430px,94vw);
-    background:#fff;
-    border:5px solid #6c4937;
-    border-radius:18px 18px 12px 12px;
+    width:100%;
+    max-width:430px;
+    border:5px solid #674737;
+    border-radius:20px 20px 12px 12px;
     overflow:hidden;
-    box-shadow:0 8px 20px rgba(80,50,30,.16);
+    background:white;
+    box-shadow:0 10px 25px rgba(80,50,30,.15);
 }
 
 .floor{
-    min-height:105px;
-    border-bottom:4px solid #6c4937;
+    width:100%;
+    min-height:108px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    cursor:pointer;
-    transition:.15s;
     text-align:center;
-    padding:10px;
+    border-bottom:4px solid #674737;
+    padding:12px;
+    user-select:none;
+    -webkit-user-select:none;
+    touch-action:manipulation;
 }
 
 .floor:last-child{
-    border-bottom:none;
+    border-bottom:0;
 }
 
 .floor:active{
-    transform:scale(.98);
+    opacity:.72;
 }
 
-.floor-label{
-    font-size:20px;
+.floor-title{
+    font-size:21px;
     font-weight:900;
-    margin-bottom:7px;
 }
 
-.floor-sub{
+.floor-desc{
+    margin-top:6px;
     font-size:12px;
-    color:#8c7668;
     line-height:1.5;
+    color:#8c7465;
 }
 
-.floor-roof{background:#dcecff;min-height:85px;}
-.floor-four{background:#e5f1d9;}
-.floor-three{background:#ffeecf;}
-.floor-two{background:#ffe5c8;}
-.floor-parking{background:#e7e1da;}
+.floor-roof{
+    min-height:82px;
+    background:#dcecff;
+}
 
-.controls{
+.floor-4{
+    background:#e3f0d8;
+}
+
+.floor-3{
+    background:#ffedc9;
+}
+
+.floor-2{
+    background:#ffe3c1;
+}
+
+.floor-1{
+    background:#ddd9d3;
+}
+
+
+/* =========================
+   검색
+========================= */
+
+.main-tools{
+    width:100%;
     max-width:430px;
     margin:0 auto;
-    padding:0 15px 20px;
+    padding:0 16px 25px;
 }
 
-.search-box{
+.search{
     width:100%;
-    border:2px solid #e5d3c5;
+    height:48px;
+    border:2px solid #ead7c8;
     border-radius:14px;
-    padding:13px;
+    padding:0 15px;
+    font-size:15px;
     outline:none;
     background:white;
-    font-size:14px;
 }
 
-.search-box:focus{
-    border-color:#bd8e6d;
+.search:focus{
+    border-color:#bd8f70;
 }
 
-.btn-row{
+.tool-row{
     display:flex;
     gap:8px;
-    margin-top:10px;
+    margin-top:9px;
 }
 
-button{
-    border:none;
-    border-radius:13px;
-    padding:12px 15px;
-    font-family:inherit;
-    font-size:14px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.notice-btn{
+.tool-btn{
     flex:1;
-    background:#dba87d;
+    min-height:44px;
+    border-radius:13px;
+    background:#c9926d;
     color:white;
+    font-weight:800;
 }
 
-.reset-btn{
-    background:#eadbd0;
-    color:#755848;
+.tool-btn.secondary{
+    background:#e7d9cf;
+    color:#6c5243;
 }
 
-.alert-box{
+.alert-area{
+    width:100%;
     max-width:430px;
-    margin:0 auto 15px;
-    padding:0 15px;
+    margin:0 auto;
+    padding:0 16px 15px;
 }
 
-.alert-inner{
-    background:#fff0d9;
-    border:2px solid #edc28d;
+.alert{
+    background:#fff0d3;
+    border:2px solid #edc98e;
     border-radius:15px;
-    padding:13px;
+    padding:12px 14px;
     font-size:13px;
     line-height:1.7;
 }
 
-.back-btn{
+
+/* =========================
+   공통
+========================= */
+
+.back{
     display:block;
-    width:calc(100% - 30px);
+    width:calc(100% - 32px);
     max-width:430px;
-    margin:10px auto;
-    background:#7a5947;
+    margin:0 auto 15px;
+    min-height:46px;
+    border-radius:14px;
+    background:#765442;
     color:white;
-}
-
-.room-list{
-    max-width:430px;
-    margin:0 auto;
-    padding:5px 15px 30px;
-}
-
-.room-card{
-    background:white;
-    border-radius:18px;
-    margin:10px 0;
-    padding:16px;
-    box-shadow:0 4px 13px rgba(70,45,30,.1);
-    border:2px solid #eadbd0;
-}
-
-.room-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-}
-
-.room-number{
-    font-size:21px;
     font-weight:900;
-    color:#654633;
-}
-
-.room-name{
-    margin-top:5px;
-    color:#9a7966;
     font-size:14px;
 }
 
-.room-status{
-    font-size:11px;
+.content{
+    width:100%;
+    max-width:430px;
+    margin:0 auto;
+    padding:0 16px 30px;
+}
+
+
+/* =========================
+   호실 카드
+========================= */
+
+.room{
+    background:white;
+    border:2px solid #eadbd0;
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:12px;
+    box-shadow:0 5px 14px rgba(80,50,30,.08);
+}
+
+.room-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+}
+
+.room-number{
+    font-size:22px;
+    font-weight:900;
+    color:#674737;
+}
+
+.room-name{
+    margin-top:4px;
+    color:#9b7c69;
+    font-size:13px;
+}
+
+.badge{
     padding:5px 8px;
     border-radius:20px;
-    background:#eee;
+    font-size:11px;
     white-space:nowrap;
+    background:#eee7e1;
 }
 
-.status-good{
-    background:#dff1dc;
-    color:#3d7435;
+.badge.good{
+    background:#dff0d9;
+    color:#3f7436;
 }
 
-.status-warning{
+.badge.warning{
     background:#fff0c7;
-    color:#916c00;
+    color:#916b00;
 }
 
-.status-danger{
+.badge.danger{
     background:#ffdada;
-    color:#9c3333;
+    color:#963838;
 }
 
 .room-info{
     margin-top:13px;
     font-size:13px;
     line-height:1.8;
-    color:#69584e;
+    color:#6c5a4f;
 }
 
-.room-actions{
-    display:flex;
-    gap:7px;
-    margin-top:12px;
-}
-
-.edit-btn{
-    flex:1;
-    background:#e8c7ad;
-    color:#654633;
-}
-
-.clear-btn{
-    background:#eee5df;
-    color:#795f51;
-}
-
-.alarm-info{
-    margin-top:8px;
-    padding:8px;
-    background:#fff7e9;
+.alarm{
+    margin-top:9px;
+    padding:8px 10px;
     border-radius:10px;
+    background:#fff7e8;
+    color:#80664f;
     font-size:12px;
-    color:#80644e;
 }
+
+.room-buttons{
+    display:flex;
+    gap:8px;
+    margin-top:13px;
+}
+
+.room-buttons button{
+    min-height:42px;
+    border-radius:12px;
+    font-weight:800;
+}
+
+.edit{
+    flex:1;
+    background:#e7c5a9;
+    color:#654737;
+}
+
+.remove{
+    padding:0 14px;
+    background:#eee5df;
+    color:#765c4e;
+}
+
+
+/* =========================
+   주차장
+========================= */
+
+.parking-box{
+    background:white;
+    border:2px solid #d9d3ce;
+    border-radius:20px;
+    padding:25px 18px;
+    text-align:center;
+    box-shadow:0 5px 14px rgba(80,50,30,.08);
+}
+
+.parking-icon{
+    font-size:52px;
+}
+
+.parking-title{
+    margin-top:8px;
+    font-size:24px;
+    font-weight:900;
+}
+
+.parking-text{
+    margin-top:8px;
+    color:#8b786c;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.parking-edit{
+    margin-top:18px;
+    width:100%;
+    min-height:45px;
+    border-radius:13px;
+    background:#d9c8bb;
+    color:#654737;
+    font-weight:900;
+}
+
+
+/* =========================
+   모달
+========================= */
 
 .modal-bg{
-    display:none;
     position:fixed;
-    z-index:1000;
     inset:0;
-    background:rgba(45,30,20,.45);
-    padding:20px;
+    z-index:9999;
+    display:none;
     align-items:center;
     justify-content:center;
+    padding:16px;
+    background:rgba(40,25,15,.5);
 }
 
-.modal-bg.show{
+.modal-bg.open{
     display:flex;
 }
 
 .modal{
-    width:min(430px,100%);
+    width:100%;
+    max-width:430px;
     max-height:92vh;
     overflow-y:auto;
     background:white;
-    border-radius:23px;
-    padding:22px;
-    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    border-radius:22px;
+    padding:20px;
 }
 
 .modal h2{
     margin:0 0 17px;
-    color:#654633;
+    color:#674737;
 }
 
 .modal h3{
-    margin:18px 0 13px;
-    color:#76523d;
+    margin:20px 0 13px;
+    color:#765442;
 }
 
-.modal hr{
-    border:0;
-    border-top:1px solid #eadbd0;
-    margin:18px 0;
-}
-
-.form-group{
+.field{
     margin-bottom:13px;
 }
 
-.form-group label{
+.field label{
     display:block;
-    font-size:13px;
-    font-weight:bold;
     margin-bottom:6px;
-    color:#755848;
+    font-size:13px;
+    font-weight:900;
+    color:#765442;
 }
 
-.form-group input,
-.form-group select{
+.field input,
+.field select{
     width:100%;
-    padding:12px;
-    border:2px solid #e7d8ce;
+    height:46px;
+    border:2px solid #eadbd0;
     border-radius:12px;
+    padding:0 12px;
     outline:none;
     font-size:15px;
     background:white;
 }
 
-.form-group input:focus,
-.form-group select:focus{
-    border-color:#c39779;
+.field input:focus,
+.field select:focus{
+    border-color:#c29476;
 }
 
-.modal-buttons{
+.line{
+    border:0;
+    border-top:1px solid #eee1d8;
+    margin:19px 0;
+}
+
+.modal-row{
     display:flex;
     gap:8px;
-    margin-top:18px;
 }
 
-.save-btn{
+.modal-row button{
     flex:1;
-    background:#7a5947;
+    min-height:45px;
+    border-radius:12px;
+    font-weight:900;
+}
+
+.cancel{
+    background:#eee5df;
+    color:#705849;
+}
+
+.save{
+    background:#765442;
     color:white;
 }
 
-.cancel-btn{
-    flex:1;
-    background:#eee5df;
-    color:#705a4d;
-}
-
-.delete-btn{
+.delete-all{
     width:100%;
     margin-top:8px;
-    background:#f4d5d5;
-    color:#913d3d;
+    min-height:42px;
+    border-radius:12px;
+    background:#f3d7d7;
+    color:#923f3f;
+    font-weight:900;
 }
+
+
+/* =========================
+   검색 결과
+========================= */
 
 .search-results{
+    width:100%;
     max-width:430px;
     margin:0 auto;
-    padding:0 15px 30px;
+    padding:0 16px 30px;
 }
 
-.search-title{
+.search-heading{
     font-size:16px;
-    font-weight:bold;
-    margin:5px 0 12px;
+    font-weight:900;
+    margin-bottom:10px;
 }
 
-.empty{
+.no-result{
     text-align:center;
-    padding:30px 10px;
+    padding:25px;
     color:#9c897c;
+}
+
+
+/* =========================
+   반응형
+========================= */
+
+@media(max-width:380px){
+
+    .header h1{
+        font-size:26px;
+    }
+
+    .floor-title{
+        font-size:19px;
+    }
+
+    .room-number{
+        font-size:20px;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     메인 화면
-========================= -->
 
-<div id="mainPage" class="page active">
+<!-- ======================================
+     메인
+======================================= -->
 
-<header>
-    <h1>🏠 정인하이츠</h1>
-    <p>원룸 체크리스트</p>
-</header>
+<section id="home" class="screen active">
 
-<div id="alertBox" class="alert-box"></div>
+    <header class="header">
+        <h1>🏠 정인하이츠</h1>
+        <p>원룸 체크리스트</p>
+    </header>
 
-<div class="building-wrap">
-<div class="building">
+    <div id="alerts" class="alert-area"></div>
 
-    <!-- 5층 -->
-    <div class="floor floor-roof" onclick="openFloor(5)">
-        <div class="floor-label">옥상</div>
-        <div class="floor-sub">5층</div>
-    </div>
+    <div class="building-wrap">
 
-    <!-- 4층 -->
-    <div class="floor floor-four" onclick="openFloor(4)">
-        <div class="floor-label">4층</div>
-        <div class="floor-sub">
-            501호 · 502호 · 503호 · 505호
+        <div class="building">
+
+            <!-- 5층 -->
+            <div
+                class="floor floor-roof"
+                onclick="openFloor(5)"
+            >
+                <div class="floor-title">
+                    🏠 옥상
+                </div>
+
+                <div class="floor-desc">
+                    5층
+                </div>
+            </div>
+
+
+            <!-- 4층 -->
+            <div
+                class="floor floor-4"
+                onclick="openFloor(4)"
+            >
+                <div class="floor-title">
+                    4층
+                </div>
+
+                <div class="floor-desc">
+                    501호 · 502호 · 503호 · 505호
+                </div>
+            </div>
+
+
+            <!-- 3층 -->
+            <div
+                class="floor floor-3"
+                onclick="openFloor(3)"
+            >
+                <div class="floor-title">
+                    3층
+                </div>
+
+                <div class="floor-desc">
+                    301호 · 302호 · 303호 · 305호 · 306호 · 307호
+                </div>
+            </div>
+
+
+            <!-- 2층 -->
+            <div
+                class="floor floor-2"
+                onclick="openFloor(2)"
+            >
+                <div class="floor-title">
+                    2층
+                </div>
+
+                <div class="floor-desc">
+                    201호 · 202호 · 203호 · 205호 · 206호 · 207호
+                </div>
+            </div>
+
+
+            <!-- 1층 -->
+            <div
+                class="floor floor-1"
+                onclick="openParking()"
+            >
+                <div class="floor-title">
+                    🚗 주차장
+                </div>
+
+                <div class="floor-desc">
+                    1층
+                </div>
+            </div>
+
         </div>
+
     </div>
 
-    <!-- 3층 -->
-    <div class="floor floor-three" onclick="openFloor(3)">
-        <div class="floor-label">3층</div>
-        <div class="floor-sub">
-            301호 · 302호 · 303호 · 305호 · 306호 · 307호
-        </div>
-    </div>
 
-    <!-- 2층 -->
-    <div class="floor floor-two" onclick="openFloor(2)">
-        <div class="floor-label">2층</div>
-        <div class="floor-sub">
-            201호 · 202호 · 203호 · 205호 · 206호 · 207호
-        </div>
-    </div>
+    <div class="main-tools">
 
-    <!-- 1층 -->
-    <div class="floor floor-parking" onclick="openParking()">
-        <div class="floor-label">🚗 주차장</div>
-        <div class="floor-sub">1층</div>
-    </div>
-
-</div>
-</div>
-
-<div class="controls">
-
-    <input
-        id="searchInput"
-        class="search-box"
-        type="text"
-        placeholder="🔍 호실 또는 이름 검색"
-        oninput="searchRooms()"
-    >
-
-    <div class="btn-row">
-
-        <button
-            class="notice-btn"
-            onclick="requestNotification()"
+        <input
+            id="search"
+            class="search"
+            type="text"
+            placeholder="🔍 호실 또는 이름 검색"
+            oninput="searchRooms()"
         >
-            🔔 알림 허용
-        </button>
 
-        <button
-            class="reset-btn"
-            onclick="resetAll()"
-        >
-            초기화
-        </button>
+        <div class="tool-row">
+
+            <button
+                class="tool-btn"
+                onclick="allowNotification()"
+            >
+                🔔 알림 허용
+            </button>
+
+            <button
+                class="tool-btn secondary"
+                onclick="resetEverything()"
+            >
+                초기화
+            </button>
+
+        </div>
 
     </div>
-</div>
-
-<div id="searchResults" class="search-results"></div>
-
-</div>
 
 
-<!-- =========================
+    <div id="searchResults" class="search-results"></div>
+
+</section>
+
+
+
+<!-- ======================================
      층 화면
-========================= -->
+======================================= -->
 
-<div id="floorPage" class="page">
+<section id="floorScreen" class="screen">
 
-<header>
-    <h1 id="floorTitle">2층</h1>
-    <p>호실을 눌러 정보를 입력하세요</p>
-</header>
-
-<button class="back-btn" onclick="goHome()">
-    ← 정인하이츠 건물로 돌아가기
-</button>
-
-<div id="roomList" class="room-list"></div>
-
-</div>
-
-
-<!-- =========================
-     주차장
-========================= -->
-
-<div id="parkingPage" class="page">
-
-<header>
-    <h1>🚗 주차장</h1>
-    <p>정인하이츠 1층</p>
-</header>
-
-<button class="back-btn" onclick="goHome()">
-    ← 정인하이츠 건물로 돌아가기
-</button>
-
-<div class="room-list">
-
-<div class="room-card">
-
-    <div class="room-top">
-
-        <div class="room-number">
-            1층
-        </div>
-
-        <div class="room-status status-good">
-            주차장
-        </div>
-
-    </div>
-
-    <div class="room-info">
-        🚗 정인하이츠 주차장
-        <br>
-        주차장 관련 메모를 저장할 수 있습니다.
-    </div>
-
-    <div class="room-actions">
-
-        <button
-            class="edit-btn"
-            onclick="editParking()"
-        >
-            ✏️ 메모 입력
-        </button>
-
-    </div>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- =========================
-     호실 입력 모달
-========================= -->
-
-<div id="roomModal" class="modal-bg">
-
-<div class="modal">
-
-    <h2 id="modalTitle">201호</h2>
-
-    <div class="form-group">
-        <label>👤 이름</label>
-
-        <input
-            id="roomName"
-            type="text"
-            placeholder="입주자 이름"
-        >
-    </div>
-
-    <div class="form-group">
-        <label>💰 보증금</label>
-
-        <input
-            id="deposit"
-            type="text"
-            placeholder="예: 500만원"
-        >
-    </div>
-
-    <div class="form-group">
-        <label>🏠 월세</label>
-
-        <input
-            id="rent"
-            type="text"
-            placeholder="예: 40만원"
-        >
-    </div>
-
-    <div class="form-group">
-        <label>📅 계약한 날</label>
-
-        <input
-            id="contractDate"
-            type="date"
-        >
-    </div>
-
-    <div class="form-group">
-        <label>📅 만기 날</label>
-
-        <input
-            id="expiryDate"
-            type="date"
-        >
-    </div>
-
-    <hr>
-
-    <h3>🔔 이 호실 알람 설정</h3>
-
-    <div class="form-group">
-        <label>알람 사용</label>
-
-        <select id="alarmEnabled">
-            <option value="false">알람 끄기</option>
-            <option value="true">알람 켜기</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label>📅 알람 날짜</label>
-
-        <input
-            id="alarmDate"
-            type="date"
-        >
-    </div>
-
-    <div class="form-group">
-        <label>⏰ 알람 시간</label>
-
-        <input
-            id="alarmTime"
-            type="time"
-        >
-    </div>
-
-    <div class="form-group">
-        <label>🔊 음성 알람</label>
-
-        <select id="voiceAlarm">
-
-            <option value="false">
-                음성 알람 끄기
-            </option>
-
-            <option value="true">
-                음성 알람 켜기
-            </option>
-
-        </select>
-    </div>
-
-    <div class="modal-buttons">
-
-        <button
-            class="cancel-btn"
-            onclick="closeModal()"
-        >
-            취소
-        </button>
-
-        <button
-            class="save-btn"
-            onclick="saveRoom()"
-        >
-            저장
-        </button>
-
-    </div>
+    <header class="header">
+        <h1 id="floorName">2층</h1>
+        <p>호실을 선택해주세요</p>
+    </header>
 
     <button
-        class="delete-btn"
-        onclick="deleteRoom()"
+        class="back"
+        onclick="goHome()"
     >
-        🗑️ 이 호실 정보 삭제
+        ← 정인하이츠로 돌아가기
     </button>
 
-</div>
-</div>
+    <div
+        id="rooms"
+        class="content"
+    ></div>
+
+</section>
 
 
-<!-- =========================
-     주차장 메모 모달
-========================= -->
 
-<div id="parkingModal" class="modal-bg">
+<!-- ======================================
+     옥상
+======================================= -->
 
-<div class="modal">
+<section id="roofScreen" class="screen">
 
-    <h2>🚗 주차장 메모</h2>
+    <header class="header">
+        <h1>🏠 옥상</h1>
+        <p>정인하이츠 5층</p>
+    </header>
 
-    <div class="form-group">
+    <button
+        class="back"
+        onclick="goHome()"
+    >
+        ← 정인하이츠로 돌아가기
+    </button>
 
-        <label>메모</label>
+    <div class="content">
 
-        <input
-            id="parkingMemo"
-            type="text"
-            placeholder="주차장 관련 메모"
-        >
+        <div class="parking-box">
+
+            <div class="parking-icon">
+                🏠
+            </div>
+
+            <div class="parking-title">
+                옥상
+            </div>
+
+            <div class="parking-text">
+                정인하이츠 5층 옥상입니다.
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="modal-buttons">
+</section>
+
+
+
+<!-- ======================================
+     주차장
+======================================= -->
+
+<section id="parkingScreen" class="screen">
+
+    <header class="header">
+        <h1>🚗 주차장</h1>
+        <p>정인하이츠 1층</p>
+    </header>
+
+    <button
+        class="back"
+        onclick="goHome()"
+    >
+        ← 정인하이츠로 돌아가기
+    </button>
+
+    <div class="content">
+
+        <div class="parking-box">
+
+            <div class="parking-icon">
+                🚗
+            </div>
+
+            <div class="parking-title">
+                주차장
+            </div>
+
+            <div class="parking-text">
+                정인하이츠 1층 주차장입니다.
+                <br>
+                주차장 관련 메모를 저장할 수 있습니다.
+            </div>
+
+            <button
+                class="parking-edit"
+                onclick="openParkingMemo()"
+            >
+                ✏️ 주차장 메모
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================
+     호실 모달
+======================================= -->
+
+<div
+    id="roomModal"
+    class="modal-bg"
+>
+
+    <div class="modal">
+
+        <h2 id="modalRoom">
+            201호
+        </h2>
+
+
+        <div class="field">
+
+            <label>👤 이름</label>
+
+            <input
+                id="name"
+                type="text"
+                placeholder="입주자 이름"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>💰 보증금</label>
+
+            <input
+                id="deposit"
+                type="text"
+                placeholder="예: 500만원"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>🏠 월세</label>
+
+            <input
+                id="rent"
+                type="text"
+                placeholder="예: 40만원"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>📅 계약한 날</label>
+
+            <input
+                id="contract"
+                type="date"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>📅 만기 날</label>
+
+            <input
+                id="expiry"
+                type="date"
+            >
+
+        </div>
+
+
+        <hr class="line">
+
+
+        <h3>
+            🔔 이 호실 알람
+        </h3>
+
+
+        <div class="field">
+
+            <label>알람</label>
+
+            <select id="alarmEnabled">
+
+                <option value="false">
+                    알람 끄기
+                </option>
+
+                <option value="true">
+                    알람 켜기
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>알람 날짜</label>
+
+            <input
+                id="alarmDate"
+                type="date"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>알람 시간</label>
+
+            <input
+                id="alarmTime"
+                type="time"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>🔊 음성 알람</label>
+
+            <select id="voice">
+
+                <option value="false">
+                    음성 알람 끄기
+                </option>
+
+                <option value="true">
+                    음성 알람 켜기
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="modal-row">
+
+            <button
+                class="cancel"
+                onclick="closeRoomModal()"
+            >
+                취소
+            </button>
+
+            <button
+                class="save"
+                onclick="saveRoom()"
+            >
+                저장
+            </button>
+
+        </div>
+
 
         <button
-            class="cancel-btn"
-            onclick="closeParkingModal()"
+            class="delete-all"
+            onclick="deleteCurrentRoom()"
         >
-            취소
-        </button>
-
-        <button
-            class="save-btn"
-            onclick="saveParking()"
-        >
-            저장
+            🗑️ 이 호실 정보 삭제
         </button>
 
     </div>
 
 </div>
+
+
+
+<!-- ======================================
+     주차장 메모
+======================================= -->
+
+<div
+    id="parkingModal"
+    class="modal-bg"
+>
+
+    <div class="modal">
+
+        <h2>
+            🚗 주차장 메모
+        </h2>
+
+        <div class="field">
+
+            <label>메모</label>
+
+            <input
+                id="parkingMemo"
+                type="text"
+                placeholder="주차장 관련 메모"
+            >
+
+        </div>
+
+        <div class="modal-row">
+
+            <button
+                class="cancel"
+                onclick="closeParkingMemo()"
+            >
+                취소
+            </button>
+
+            <button
+                class="save"
+                onclick="saveParkingMemo()"
+            >
+                저장
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
+
 
 
 <script>
 
 /* =========================================
-   호실 구조
+   정확한 호실 목록
 ========================================= */
 
-const FLOOR_ROOMS = {
+const FLOORS = {
 
     2: [
         "201",
@@ -748,89 +1050,74 @@ const FLOOR_ROOMS = {
 
 
 /* =========================================
-   저장 데이터
+   저장
 ========================================= */
 
-const STORAGE_KEY =
-"jeongin_heights_rooms_v4";
+const KEY =
+"jeongin_heights_final";
 
-let rooms =
+let data =
 JSON.parse(
-    localStorage.getItem(
-        STORAGE_KEY
-    ) || "{}"
+    localStorage.getItem(KEY) || "{}"
 );
 
-let currentRoom = null;
+let selectedRoom = null;
 
 
 /* =========================================
-   데이터 저장
+   화면 전환
 ========================================= */
 
-function saveData(){
+function showScreen(id){
 
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(rooms)
-    );
+    document
+        .querySelectorAll(".screen")
+        .forEach(function(screen){
+
+            screen.classList.remove("active");
+
+        });
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+    window.scrollTo(0,0);
 
 }
 
-
-/* =========================================
-   홈으로
-========================================= */
 
 function goHome(){
 
-    document
-    .querySelectorAll(".page")
-    .forEach(
-        page =>
-        page.classList.remove("active")
-    );
+    showScreen("home");
 
-    document
-    .getElementById("mainPage")
-    .classList.add("active");
-
-    renderAlert();
+    renderAlerts();
 
 }
 
 
 /* =========================================
-   층 열기
+   층
 ========================================= */
 
 function openFloor(floor){
 
     if(floor === 5){
 
-        alert("🏠 5층은 옥상입니다.");
+        showScreen("roofScreen");
 
         return;
 
     }
 
     document
-    .querySelectorAll(".page")
-    .forEach(
-        page =>
-        page.classList.remove("active")
-    );
-
-    document
-    .getElementById("floorPage")
-    .classList.add("active");
-
-    document
-    .getElementById("floorTitle")
-    .textContent =
-    floor + "층";
+        .getElementById("floorName")
+        .textContent =
+        floor + "층";
 
     renderRooms(floor);
+
+    showScreen("floorScreen");
 
 }
 
@@ -841,338 +1128,143 @@ function openFloor(floor){
 
 function openParking(){
 
-    document
-    .querySelectorAll(".page")
-    .forEach(
-        page =>
-        page.classList.remove("active")
-    );
-
-    document
-    .getElementById("parkingPage")
-    .classList.add("active");
+    showScreen("parkingScreen");
 
 }
 
 
-function editParking(){
+function openParkingMemo(){
 
     document
-    .getElementById("parkingMemo")
-    .value =
-    localStorage.getItem(
-        "parkingMemo"
-    ) || "";
+        .getElementById("parkingMemo")
+        .value =
+        localStorage.getItem(
+            "parking_memo"
+        ) || "";
 
     document
-    .getElementById("parkingModal")
-    .classList.add("show");
+        .getElementById("parkingModal")
+        .classList.add("open");
 
 }
 
 
-function saveParking(){
+function closeParkingMemo(){
 
-    const memo =
     document
-    .getElementById("parkingMemo")
-    .value;
+        .getElementById("parkingModal")
+        .classList.remove("open");
+
+}
+
+
+function saveParkingMemo(){
 
     localStorage.setItem(
-        "parkingMemo",
-        memo
+        "parking_memo",
+        document
+            .getElementById("parkingMemo")
+            .value
     );
 
-    closeParkingModal();
-
-    alert(
-        "주차장 메모가 저장되었습니다."
-    );
-
-}
-
-
-function closeParkingModal(){
-
-    document
-    .getElementById("parkingModal")
-    .classList.remove("show");
+    closeParkingMemo();
 
 }
 
 
 /* =========================================
-   호실 목록 표시
+   층의 호실 표시
 ========================================= */
 
 function renderRooms(floor){
 
-    const list =
-    document
-    .getElementById("roomList");
+    const container =
+        document.getElementById("rooms");
 
-    list.innerHTML = "";
+    container.innerHTML = "";
 
-    const roomNumbers =
-    FLOOR_ROOMS[floor] || [];
+    FLOORS[floor].forEach(
+        function(room){
 
-    roomNumbers.forEach(
-        roomNumber => {
-
-            const data =
-            rooms[roomNumber] || {};
+            const item =
+                data[room] || {};
 
             const status =
-            getExpiryStatus(
-                data.expiryDate
-            );
+                expiryStatus(
+                    item.expiry
+                );
 
-            const card =
-            document.createElement(
-                "div"
-            );
+            const div =
+                document.createElement("div");
 
-            card.className =
-            "room-card";
+            div.className = "room";
 
-            let alarmHTML = "";
+            let information = "";
 
-            if(data.alarmEnabled){
+            if(item.deposit){
 
-                alarmHTML = `
-
-                    <div class="alarm-info">
-
-                        🔔 알람:
-                        ${
-                            data.alarmDate ||
-                            "날짜 없음"
-                        }
-
-                        ${
-                            data.alarmTime ||
-                            ""
-                        }
-
-                        ${
-                            data.voiceAlarm
-                            ? " · 🔊 음성 ON"
-                            : " · 음성 OFF"
-                        }
-
-                    </div>
-
-                `;
+                information +=
+                    "💰 보증금: " +
+                    safe(item.deposit) +
+                    "<br>";
 
             }
 
-            card.innerHTML = `
+            if(item.rent){
 
-                <div class="room-top">
+                information +=
+                    "🏠 월세: " +
+                    safe(item.rent) +
+                    "<br>";
 
-                    <div>
+            }
 
-                        <div class="room-number">
-                            ${roomNumber}호
-                        </div>
+            if(item.contract){
 
-                        <div class="room-name">
+                information +=
+                    "📅 계약일: " +
+                    item.contract +
+                    "<br>";
 
-                            ${
-                                data.name
-                                ?
-                                "👤 " +
-                                escapeHtml(data.name)
-                                :
-                                "이름 미입력"
-                            }
+            }
 
-                        </div>
+            if(item.expiry){
 
-                    </div>
+                information +=
+                    "🔔 만기일: " +
+                    item.expiry;
 
-                    <div
-                        class="room-status
-                        ${status.className}"
-                    >
-                        ${status.text}
-                    </div>
+            }
 
-                </div>
+            if(!information){
 
-                <div class="room-info">
+                information =
+                    "아직 입력된 정보가 없습니다.";
 
-                    ${
-                        data.deposit
-                        ?
-                        "💰 보증금: " +
-                        escapeHtml(data.deposit) +
-                        "<br>"
-                        :
+            }
+
+
+            let alarm = "";
+
+            if(item.alarmEnabled){
+
+                alarm =
+
+                    "<div class='alarm'>" +
+
+                    "🔔 알람: " +
+                    (
+                        item.alarmDate ||
+                        "날짜 없음"
+                    ) +
+
+                    " " +
+
+                    (
+                        item.alarmTime ||
                         ""
-                    }
+                    ) +
 
-                    ${
-                        data.rent
-                        ?
-                        "🏠 월세: " +
-                        escapeHtml(data.rent) +
-                        "<br>"
-                        :
-                        ""
-                    }
-
-                    ${
-                        data.contractDate
-                        ?
-                        "📅 계약일: " +
-                        data.contractDate +
-                        "<br>"
-                        :
-                        ""
-                    }
-
-                    ${
-                        data.expiryDate
-                        ?
-                        "🔔 만기일: " +
-                        data.expiryDate
-                        :
-                        ""
-                    }
-
-                    ${
-                        !data.deposit &&
-                        !data.rent &&
-                        !data.contractDate &&
-                        !data.expiryDate
-                        ?
-                        "아직 입력된 정보가 없습니다."
-                        :
-                        ""
-                    }
-
-                    ${alarmHTML}
-
-                </div>
-
-                <div class="room-actions">
-
-                    <button
-                        class="edit-btn"
-                        onclick="
-                            openRoom('${roomNumber}')
-                        "
-                    >
-                        ✏️ 정보 입력/수정
-                    </button>
-
-                    <button
-                        class="clear-btn"
-                        onclick="
-                            quickDelete('${roomNumber}')
-                        "
-                    >
-                        삭제
-                    </button>
-
-                </div>
-
-            `;
-
-            list.appendChild(card);
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   호실 열기
-========================================= */
-
-function openRoom(roomNumber){
-
-    currentRoom =
-    roomNumber;
-
-    const data =
-    rooms[roomNumber] || {};
-
-    document
-    .getElementById("modalTitle")
-    .textContent =
-    roomNumber + "호";
-
-    document
-    .getElementById("roomName")
-    .value =
-    data.name || "";
-
-    document
-    .getElementById("deposit")
-    .value =
-    data.deposit || "";
-
-    document
-    .getElementById("rent")
-    .value =
-    data.rent || "";
-
-    document
-    .getElementById("contractDate")
-    .value =
-    data.contractDate || "";
-
-    document
-    .getElementById("expiryDate")
-    .value =
-    data.expiryDate || "";
-
-    document
-    .getElementById("alarmEnabled")
-    .value =
-    String(
-        data.alarmEnabled || false
-    );
-
-    document
-    .getElementById("alarmDate")
-    .value =
-    data.alarmDate || "";
-
-    document
-    .getElementById("alarmTime")
-    .value =
-    data.alarmTime || "";
-
-    document
-    .getElementById("voiceAlarm")
-    .value =
-    String(
-        data.voiceAlarm || false
-    );
-
-    document
-    .getElementById("roomModal")
-    .classList
-    .add("show");
-
-}
-
-
-/* =========================================
-   저장
-========================================= */
-
-function saveRoom(){
-
-    if(!currentRoom)
-        return;
-
-    rooms[currentRoom] = {
-
-        name:
-        document
-      
+                    (
+                        item.voice
+                        ? " · 🔊 음성 ON
